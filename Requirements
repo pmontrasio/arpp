@@ -1,0 +1,30 @@
+./script/plugin install git://github.com/technoweenie/restful-authentication.git
+sudo gem install rubyist-aasm
+./script/plugin install git://github.com/dchelimsky/rspec.git
+./script/plugin install git://github.com/dchelimsky/rspec-rails.git
+./script/generate rspec
+./script/generate authenticated user sessions --include-activation --aasm 
+Ready to generate.
+----------------------------------------------------------------------
+Once finished, don't forget to:
+
+- Add an observer to config/environment.rb
+    config.active_record.observers = :user_observer
+- Install the acts_as_state_machine gem:
+    sudo gem sources -a http://gems.github.com (If you haven't already)
+    sudo gem install rubyist-aasm
+- Add routes to these resources. In config/routes.rb, insert routes like:
+    map.signup '/signup', :controller => 'users', :action => 'new'
+    map.login  '/login',  :controller => 'sessions', :action => 'new'
+    map.logout '/logout', :controller => 'sessions', :action => 'destroy'
+    map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
+  and modify the map.resources :users line to include these actions:
+    map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete }
+
+----------------------------------------------------------------------
+
+We've create a new site key in config/initializers/site_keys.rb.  If you have existing
+user accounts their passwords will no longer work (see README). As always,
+keep this file safe but don't post it in public.
+
+
