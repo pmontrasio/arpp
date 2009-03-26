@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.1.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -43,20 +43,6 @@ Rails::Initializer.run do |config|
   # Run "rake -D time" for a list of tasks for finding time zone names. Comment line to use default local time.
   config.time_zone = 'UTC'
 
-  # Your secret key for verifying cookie session data integrity.
-  # If you change this key, all old sessions will become invalid!
-  # Make sure the secret is at least 30 characters and all random, 
-  # no regular words or you'll be exposed to dictionary attacks.
-  config.action_controller.session = {
-    :session_key => '_xmpp_server_session',
-    :secret      => '78e35f84547f46870ce10128cd207dfe6aba27a2ac9ea12d8b92f72dff5b40ec7e1d8f3b740e4e3a51db1ad5f077ddb27fc997753f2890c8a574e2a3ae16f034'
-  }
-
-  # Use the database for sessions instead of the cookie-based default,
-  # which shouldn't be used to store highly confidential information
-  # (create the session table with "rake db:sessions:create")
-  # config.action_controller.session_store = :active_record_store
-
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,
   # like if you have constraints or database-specific column types
@@ -64,4 +50,9 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+  config.active_record.observers = :user_observer
+
+  config.gem "mislav-will_paginate", :version => "~> 2.3.6",
+    :lib => "will_paginate", :source => "http://gems.github.com"
+
 end
