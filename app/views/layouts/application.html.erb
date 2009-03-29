@@ -1,0 +1,83 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>ARPPR: Arduino to XMPP Gateway</title>
+    <%= stylesheet_link_tag "scaffold" %>
+    <script type="text/javascript" src="javascripts/prototype.js"></script>
+    <script type="text/javascript" src="javascripts/effects.js"></script>
+    <script type="text/javascript">
+      function about() {
+        if (Element.empty('about-content')) {
+          new Ajax.Updater('about-content', 'rails/info/properties', {
+            method:     'get',
+            onFailure:  function() {Element.classNames('about-content').add('failure')},
+            onComplete: function() {new Effect.BlindDown('about-content', {duration: 0.25})}
+          });
+        } else {
+          new Effect[Element.visible('about-content') ? 
+            'BlindUp' : 'BlindDown']('about-content', {duration: 0.25});
+        }
+      }
+      
+    </script>
+  </head>
+  <body>
+    <div id="page">
+      <div id="sidebar">
+        <ul id="sidebar-items">
+        
+          <li>
+            <ul class="links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/signup">Register an account</a> <strong>(won't work)</strong></li>
+<% unless current_user %>
+              <li><a href="/login">Login</a></li>
+<% else %>
+              <li><a href="/logout">Logout</a></li>
+<% end %>
+            </ul>
+          </li>
+
+          <li>
+            <h3>The Milano Hack-Ups</h3>
+            <ul class="links">
+              <li><a href="http://www.hack-up.org/">Home</a></li>
+              <li><a href="http://www.hack-up.org/wiki/index.php?title=Milan_29_Mar_2009">
+	      March 29 2009</a></li>
+            </ul>
+          </li>
+          
+          <li>
+            <h3>Software</h3>
+            <ul class="links">
+              <li><a href="http://github.com/pmontrasio/arpp/tree/master">
+		  The code of this application</a></li>
+              <li><a href="http://home.gna.org/xmpp4r/">The XMPP4R Gem</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div id="content">
+        <div id="header">
+          <h1>ARPPR</h1>
+          <h2>Arduino to XMPP gateway</h2>
+        </div>
+
+<% if current_user %>
+        <div id="about">
+	  <p>Welcome <strong><%= current_user.login %></strong></p>
+        </div>
+<% end %>
+        
+
+<%= yield %>
+
+      
+      <div id="footer">&nbsp;</div>
+    </div>
+  </body>
+</html>
