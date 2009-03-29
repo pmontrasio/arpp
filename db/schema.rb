@@ -9,14 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090318184820) do
+ActiveRecord::Schema.define(:version => 20090329125110) do
 
   create_table "arduinos", :force => true do |t|
-    t.string   "ip_address", :null => false
     t.string   "drb"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",    :null => false
+    t.string   "device_key", :null => false
   end
+
+  add_index "arduinos", ["device_key"], :name => "index_arduinos_on_device_key", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40

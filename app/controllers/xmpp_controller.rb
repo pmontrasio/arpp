@@ -18,14 +18,14 @@ class XmppController < ApplicationController
 
     # Login
     #jid = JID::new("pmontrasio@gmail.com", "talk.google.com", "arduino")
-	jid = JID.new("kit@tinkerkit.com/Testing")
+    jid = JID.new("kit@tinkerkit.com/Testing")
     #password = "arduinopwd"
-	password = "1234567890"
+    password = "1234567890"
     cl = Client.new(jid)
     cl.connect
     cl.auth(password)
 	
-	m = get_message(params)
+    m = get_message(params)
 	
     # Send it
     cl.send m
@@ -33,19 +33,19 @@ class XmppController < ApplicationController
     
   def send_message
     arduino = Arduino.find_by_ip_address(request.remote_ip)
-	if arduino.nil?
-	   connected = connect_to_xmpp
-	else
-	   connected = true
-	end
-	   
-	render :text => "false" and return unless connected
-	
-	m = get_message(params)
+    if arduino.nil?
+      connected = connect_to_xmpp
+    else
+      connected = true
+    end
+    
+    render :text => "false" and return unless connected
+    
+    m = get_message(params)
     # Send it
-	drb = decode(arduino.drb)
-	@sent = drb.send_message(m)
-	@messages = drb.get_messages
+    drb = decode(arduino.drb)
+    @sent = drb.send_message(m)
+    @messages = drb.get_messages
     
   end
   
@@ -74,7 +74,7 @@ class XmppController < ApplicationController
 
     # Add the html element to the message
     m.add_element(h)
-	return m
+    return m
   end
   
   def encode(obj)
@@ -84,16 +84,16 @@ class XmppController < ApplicationController
   end
   
   def connect_to_xmpp
-	DRb.start_service
-	drb = DRbObject.new(nil, "druby://localhost:9435")
-	status = drb.connect()
-	if status
-	  device = Arduino.new
-	  device.device_id = request.headers["X-DeviceId"]
-	  device.drb = encode(drb)
-	  device.save
-	end
-	return status
+    DRb.start_service
+    drb = DRbObject.new(nil, "druby://localhost:9435")
+    status = drb.connect()
+    if status
+      device = Arduino.new
+      device.device_id = request.headers["X-DeviceId"]
+      device.drb = encode(drb)
+      device.save
+    end
+    return status
   end
 
 end
