@@ -15,8 +15,10 @@ ActiveRecord::Schema.define(:version => 20090329125110) do
     t.string   "drb"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",    :null => false
-    t.string   "device_key", :null => false
+    t.integer  "user_id"
+    t.string   "device_key"
+    t.string   "xmpp_account"
+    t.string   "xmpp_password"
   end
 
   add_index "arduinos", ["device_key"], :name => "index_arduinos_on_device_key", :unique => true

@@ -5,12 +5,14 @@ class AddFieldsToArduinos < ActiveRecord::Migration
   extend MigrationHelpers
 
   def self.up
-    add_column :arduinos, :user_id, :int, :null => false
+    add_column :arduinos, :user_id, :int
     foreign_key :arduinos, :user_id, :users
 
     remove_column :arduinos, :ip_address
-    add_column :arduinos, :device_key, :string, :null => false
+    add_column :arduinos, :device_key, :string
     add_index :arduinos, :device_key, :unique => true
+    add_column :arduinos, :xmpp_account, :string
+    add_column :arduinos, :xmpp_password, :string
 
     user = User.new
     user.login = "march29"
@@ -31,9 +33,14 @@ class AddFieldsToArduinos < ActiveRecord::Migration
   def self.down
     remove_foreign_key :arduinos, :user_id
     remove_column :arduinos, :user_id
-
     remove_index :arduinos, :device_key
     remove_column :arduinos, :device_key
+    remove_column :arduinos, :xmpp_account
+    remove_column :arduinos, :xmpp_password
+
     add_column :arduinos, :ip_address, :string
+
+    User.delete_all "login = 'march29'"
+
   end
 end

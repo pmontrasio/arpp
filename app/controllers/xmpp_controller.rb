@@ -12,15 +12,16 @@ include Jabber
 
 class XmppController < ApplicationController
 
-   #  Sends a message to myself
-   # GET a http://192.168.0.108:3000/xmpp/recipient=ACCOUNT&message=MESSAGE
+  #  Sends a message
   def index
 
+    logger.info "DEVICE 1 #{request.headers["X-deviceid"]}
+    logger.info "DEVICE 2 #{request.headers["X_DEVICEID"]}
+
     # Login
-    #jid = JID::new("pmontrasio@gmail.com", "talk.google.com", "arduino")
     jid = JID.new("kit@tinkerkit.com/Testing")
     #password = "arduinopwd"
-    password = "1234567890"
+    password = "tinker"
     cl = Client.new(jid)
     cl.connect
     cl.auth(password)
@@ -32,7 +33,7 @@ class XmppController < ApplicationController
   end
     
   def send_message
-    arduino = Arduino.find_by_ip_address(request.remote_ip)
+    arduino = Arduino.find_by_device_key(request.remote_ip)
     if arduino.nil?
       connected = connect_to_xmpp
     else
