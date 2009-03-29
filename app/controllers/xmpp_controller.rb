@@ -21,10 +21,6 @@ class XmppController < ApplicationController
     jid = JID.new("#{arduino.xmpp_account}/Arduino")
     password = arduino.xmpp_password
 
-    # Login
-#    jid = JID.new("kit@tinkerkit.com/Testing")
-    #password = "arduinopwd"
-#    password = "tinker"
     cl = Client.new(jid)
     cl.connect
     cl.auth(password)

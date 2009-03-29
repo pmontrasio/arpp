@@ -2,8 +2,8 @@ class ArduinosController < ApplicationController
   # GET /arduinos
   # GET /arduinos.xml
   def index
-    @arduinos = Arduino.find_all_by_user_id(current_user.id)
 
+    @arduinos = Arduino.find_all_by_user_id(current_user.id)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @arduinos }
