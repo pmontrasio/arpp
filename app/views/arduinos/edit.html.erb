@@ -1,0 +1,12 @@
+<h1>Editing arduino</h1>
+
+<% form_for(@arduino) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @arduino %> |
+<%= link_to 'Back', arduinos_path %>
