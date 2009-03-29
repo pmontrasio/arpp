@@ -20,3 +20,17 @@ config.action_view.cache_template_loading            = true
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
+
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.default_charset ="utf-8"
+config.action_mailer.perform_deliveries = false  # DO NOT SEND MAIL, THIS IS JUST A TEST
+config.action_mailer.raise_delivery_errors = true
+
+config.action_mailer.smtp_settings = {
+  :address => "something.something.net",
+  :port => 25,
+  :domain => "something.com",
+  :user_name => "something@something.com",
+  :password => "something",
+  :authentication => :login
+}
