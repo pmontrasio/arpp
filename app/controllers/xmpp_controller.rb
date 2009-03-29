@@ -15,12 +15,16 @@ class XmppController < ApplicationController
   #  Sends a message
   def index
 
-    logger.info "DEVICE #{request.headers["X_DEVICEID"]}"
+    arduino = Arduino.find_by_device_key(request.headers["X_DEVICEID"])
+    render :nothing => true, :status => 403 and return if arduino.nil?
+
+    jid = JID.new("#{arduino.xmpp_account}/Arduino")
+    password = arduino.xmpp_password
 
     # Login
-    jid = JID.new("kit@tinkerkit.com/Testing")
+#    jid = JID.new("kit@tinkerkit.com/Testing")
     #password = "arduinopwd"
-    password = "tinker"
+#    password = "tinker"
     cl = Client.new(jid)
     cl.connect
     cl.auth(password)
@@ -32,7 +36,7 @@ class XmppController < ApplicationController
   end
     
   def send_message
-    arduino = Arduino.find_by_device_key(request.remote_ip)
+    arduino = Arduino.find_by_device_key(request.headers["X_DEVICEID"])
     if arduino.nil?
       connected = connect_to_xmpp
     else
