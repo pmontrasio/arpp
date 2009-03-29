@@ -1,8 +1,21 @@
+<img src="http://arduino.cc/en/uploads/Main/ArduinoNG.jpg">
+<% form_for(@arduino) do |f| %>
 <h1>New arduino</h1>
 
-<% form_for(@arduino) do |f| %>
   <%= f.error_messages %>
 
+    <%= f.hidden_field :user_id , :value => current_user.id %>
+    <%= f.hidden_field :device_key , :value =>  Arduino.generate_device_key %>
+
+
+  <p>
+    <%= f.label :xmpp_account %><br />
+    <%= f.text_field :xmpp_account %>
+  </p>
+  <p>
+    <%= f.label :xmpp_password %><br />
+    <%= f.text_field :xmpp_password %>
+  </p>
   <p>
     <%= f.submit 'Create' %>
   </p>

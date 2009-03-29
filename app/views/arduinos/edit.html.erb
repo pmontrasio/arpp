@@ -2,7 +2,18 @@
 
 <% form_for(@arduino) do |f| %>
   <%= f.error_messages %>
-
+  <p>
+    <%= f.label :device_key %><br />
+    <%= f.text_field :device_key %>
+  </p>
+  <p>
+    <%= f.label :xmpp_account %><br />
+    <%= f.text_field :xmpp_account %>
+  </p>
+  <p>
+    <%= f.label :xmpp_password %><br />
+    <%= f.text_field :xmpp_password %>
+  </p>
   <p>
     <%= f.submit 'Update' %>
   </p>

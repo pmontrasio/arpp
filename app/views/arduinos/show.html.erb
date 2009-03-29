@@ -1,3 +1,15 @@
+<p>
+  <b>Device Key:</b>
+  <%=h @arduino.device_key %>
+  <br/>
+  Use this device key in your firmware as explained in the home page.
+</p>
+
+<p>
+  <b>XMPP account:</b>
+  <%=h @arduino.xmpp_account %>
+</p>
+
 
 <%= link_to 'Edit', edit_arduino_path(@arduino) %> |
 <%= link_to 'Back', arduinos_path %>

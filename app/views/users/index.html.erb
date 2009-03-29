@@ -12,7 +12,13 @@
             
             <li>
               <h2>Register a device</h2>
-              <p><a href="/login">Sign in</a> and <a href="/arduinos/new">click here</a></p>
+<p>
+<% unless current_user %>
+              Please <a href="/login">sign in</a> first.
+<% else %>
+             <a href="/arduinos/new">Click here</a>
+<% end %>
+</p>
             </li>
 
             <li>

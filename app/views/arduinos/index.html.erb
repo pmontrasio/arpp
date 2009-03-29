@@ -2,10 +2,18 @@
 
 <table>
   <tr>
+    <th>Device Key</td>
+    <th>XMPP Account</td>
+    <th colspan="3"></th>
   </tr>
 
 <% @arduinos.each do |arduino| %>
   <tr>
+
+    <td><%=h arduino.device_key %></td>
+    <td><%=h arduino.xmpp_account %></td>
+ 
+
     <td><%= link_to 'Show', arduino %></td>
     <td><%= link_to 'Edit', edit_arduino_path(arduino) %></td>
     <td><%= link_to 'Destroy', arduino, :confirm => 'Are you sure?', :method => :delete %></td>

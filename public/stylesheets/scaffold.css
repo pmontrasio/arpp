@@ -218,3 +218,5 @@ a:hover { background-color: #03c; color: white; text-decoration: none; }
         margin-bottom: 5px;
       }
       ul.configuration li { font-size:14px !important; }
+
+th { text-align:left;}
