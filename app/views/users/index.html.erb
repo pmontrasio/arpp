@@ -175,6 +175,7 @@
       #sidebar ul.links li {
         margin-bottom: 5px;
       }
+      ul.configuration li { font-size:14px !important; }
       
     </style>
     <script type="text/javascript" src="javascripts/prototype.js"></script>
@@ -193,12 +194,6 @@
         }
       }
       
-      window.onload = function() {
-        $('search-text').value = '';
-        $('search').onsubmit = function() {
-          $('search-text').value = 'site:rubyonrails.org ' + $F('search-text');
-        }
-      }
     </script>
   </head>
   <body>
@@ -206,6 +201,17 @@
       <div id="sidebar">
         <ul id="sidebar-items">
         
+          <li>
+            <ul class="links">
+              <li><a href="/signup">Register an account</a> <strong>(won't work)</strong></li>
+<% unless current_user %>
+              <li><a href="/login">Login</a></li>
+<% else %>
+              <li><a href="/logout">Logout</a></li>
+<% end %>
+            </ul>
+          </li>
+
           <li>
             <h3>The Milano Hack-Ups</h3>
             <ul class="links">
@@ -232,10 +238,11 @@
           <h2>Arduino to XMPP gateway</h2>
         </div>
 
+<% if current_user %>
         <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
+	  <p>Welcome <strong><%= current_user.login %></strong></p>
         </div>
+<% end %>
         
         <div id="getting-started">
           <h1>Getting started</h1>
@@ -244,22 +251,31 @@
           <ol>          
             <li>
               <h2>Register an account</h2>
-              <p>...</p>
+              <p><a href="/signup">Click here</a> and wait for a confirmation email.
+	      <strong>This is currently disabled, so you won't be able to confirm the account
+	      and join the service. We're testing it, so bear with us.</strong></p>
             </li>
             
             <li>
               <h2>Register a device</h2>
-              <p>..</p>
+              <p><a href="/login">Sign in</a> and <a href="/arduinos/new">click here</a></p>
             </li>
 
             <li>
-              <h2>Load the firmware on the device</h2>
-              <p>...</p>
+              <h2>Write the firmware for the device</h2>
+              <p>Use these values in your code:</p>
+	      <ul class="configuration">
+		<li>IP address: <tt>194.185.69.19</tt></li>
+		<li>Port: <tt>80</tt></li>
+		<li>Method: <tt>POST</tt></li>
+		<li>URL: <tt>/xmpp</tt></li>
+		<li>Arguments: <tt>id=message</tt></li>
+		</ul>
             </li>
 
             <li>
               <h2>Run the firwmare and receive IMs</h2>
-              <p>...</p>
+              <p>Check the account you associated with the device.</p>
             </li>
           </ol>
         </div>

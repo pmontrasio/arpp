@@ -15,8 +15,8 @@ class XmppController < ApplicationController
   #  Sends a message
   def index
 
-    logger.info "DEVICE 1 #{request.headers["X-deviceid"]}
-    logger.info "DEVICE 2 #{request.headers["X_DEVICEID"]}
+    logger.info "DEVICE 1 #{request.headers["X-deviceid"]}"
+    logger.info "DEVICE 2 #{request.headers["X_DEVICEID"]}"
 
     # Login
     jid = JID.new("kit@tinkerkit.com/Testing")
