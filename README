@@ -1,19 +1,24 @@
-== ARPP is an Arduino to XMPP gateway
+ARPP is an Arduino to XMPP gateway
+==================================
 
-This project aims to setup a Rails server to act as a gateway
-between an Arduino board and a XMPP client. We already have the code to
-receive a HTTP GET from the board and connect to a XMPP server to deliver
-the message received from the board. We have to polish it and turn it into
-a simple web service with this workflow:
+This is a Rails server that acts as a gateway
+between an Arduino board and a XMPP client.
+The workflow is simple:
 
    1. A user creates an account with username, password, email
-   2. The user registers a device, binds it to a XMPP account and gets a device ID
-   3. The device ID is stored in the firmware of the Arduino board and is sent
-      into every HTTP GET made by the board to the server
-   4. The server receives messages from the devices and delivers them to their XMPP accounts. 
+   2. The user enters an existing XMPP account and gets a device ID
+   3. An Arduino board makes HTTP POSTs to the server containing a message
+      and the device ID
+   4. The server extract the message from the device and delivers it to the
+      XMPP account associated with the device ID
 
-The sw for steps 1 and 2 is to be done. 
-The sw for step 3 is out of scope but might be included in the project
-as a demo.
-The sw for step 4 already exists but should be converted to a DRb approach. Some untested
-code is inside the DRb directory.
+A service based on this code is online at http://arppr.connettiva.eu
+Try it for free.
+
+If you want to roll your own server, make sure to configure the
+app/model/user_mailers.rb file or you'll get errors when user registers.
+
+TO DO
+=====
+The code to send IMs should be converted to a DRb approach. Some untested
+code is inside the DRb directory and in the arduino model.
