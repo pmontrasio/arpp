@@ -1,23 +1,21 @@
-<h1>Editing arduino</h1>
+<h1>Update the XMPP account</h1>
+
+<p>Change the XMPP account associated to the device key <%= @arduino.device_key %></p>
 
 <% form_for(@arduino) do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label :device_key %><br />
-    <%= f.text_field :device_key %>
-  </p>
   <p>
     <%= f.label :xmpp_account %><br />
     <%= f.text_field :xmpp_account %>
   </p>
   <p>
     <%= f.label :xmpp_password %><br />
-    <%= f.text_field :xmpp_password %>
+    <%= f.password_field :xmpp_password %>
   </p>
   <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @arduino %> |
-<%= link_to 'Back', arduinos_path %>
+<%= link_to 'View', @arduino %> |
+<%= link_to 'List devices', arduinos_path %>

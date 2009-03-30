@@ -2,10 +2,10 @@ body {
         margin: 0;
         margin-bottom: 25px;
         padding: 0;
-        background-color: #f0f0f0;
+        background-color: #e0f0f0;
         font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
         font-size: 13px;
-        color: #333;
+        color: #033;
 }
 
 body, p, ol, ul, td {
@@ -20,9 +20,9 @@ pre {
   font-size: 11px;
 }
 
-a  {color: #03c}
-a:visited { color: #666; }
-a:hover { background-color: #03c; color: white; text-decoration: none; }
+a  {color: #088}
+a:visited { color: #066; }
+a:hover { background-color: #066; color: white; text-decoration: none; }
       
 
 .fieldWithErrors {
@@ -66,23 +66,20 @@ a:hover { background-color: #03c; color: white; text-decoration: none; }
       
       h1 {
         font-size: 28px;
-        color: #000;
+        color: #022;
       }
       
       
       #page {
-        background-color: #f0f0f0;
+        background-color: #e0f0f0;
         width: 750px;
-        margin: 0;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 10px auto;
       }
       
       #content {
         float: left;
         background-color: white;
-        border: 3px solid #aaa;
-        border-top: none;
+        border: 3px solid #0aa;
         padding: 25px;
         width: 500px;
       }
@@ -94,6 +91,8 @@ a:hover { background-color: #03c; color: white; text-decoration: none; }
 
       #footer {
         clear: both;
+	width:500px;
+	text-align:center;
       }
       
 
@@ -110,7 +109,7 @@ a:hover { background-color: #03c; color: white; text-decoration: none; }
       }
       #header h1, #header h2 {margin: 0}
       #header h2 {
-        color: #888;
+        color: #488;
         font-weight: normal;
         font-size: 16px;
       }
@@ -173,17 +172,17 @@ a:hover { background-color: #03c; color: white; text-decoration: none; }
       }
       #getting-started li {
         font-size: 18px;
-        color: #888;
+        color: #488;
         margin-bottom: 25px;
       }
       #getting-started li h2 {
         margin: 0;
         font-weight: normal;
         font-size: 18px;
-        color: #333;
+        color: #033;
       }
       #getting-started li p {
-        color: #555;
+        color: #355;
         font-size: 13px;
       }
       
@@ -217,6 +216,7 @@ a:hover { background-color: #03c; color: white; text-decoration: none; }
       #sidebar ul.links li {
         margin-bottom: 5px;
       }
-      ul.configuration li { font-size:14px !important; }
+      ul.configuration li { font-size:14px !important; margin-bottom:0px !important }
 
 th { text-align:left;}
+p.em { font-size:110%}

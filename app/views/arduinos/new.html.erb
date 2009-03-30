@@ -1,24 +1,24 @@
 <img src="http://arduino.cc/en/uploads/Main/ArduinoNG.jpg">
 <% form_for(@arduino) do |f| %>
-<h1>New arduino</h1>
+<h1>Register a device</h1>
 
   <%= f.error_messages %>
 
-    <%= f.hidden_field :user_id , :value => current_user.id %>
-    <%= f.hidden_field :device_key , :value =>  Arduino.generate_device_key %>
-
+  <p>Enter an existing XMPP account and password. The server will use them to
+  log into your account and send you an instant message with the message received
+  from the device.</p>
 
   <p>
-    <%= f.label :xmpp_account %><br />
-    <%= f.text_field :xmpp_account %>
+    <%= f.label :xmpp_account, "XMPP Account" %><br />
+    <%= f.text_field :xmpp_account %> e.g: john.doe@server.com/Arduino
   </p>
   <p>
-    <%= f.label :xmpp_password %><br />
-    <%= f.text_field :xmpp_password %>
+    <%= f.label :xmpp_password, "XMPP Password" %><br />
+    <%= f.password_field :xmpp_password %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Register' %> and get a Device Key
   </p>
 <% end %>
 
-<%= link_to 'Back', arduinos_path %>
+<%= link_to 'List devices', arduinos_path %>

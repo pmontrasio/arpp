@@ -1,8 +1,8 @@
 <p>
   <b>Device Key:</b>
   <%=h @arduino.device_key %>
-  <br/>
-  Use this device key in your firmware as explained in the home page.
+</p>
+<p>Add this device key in your firmware as explained in the home page.
 </p>
 
 <p>
@@ -12,4 +12,4 @@
 
 
 <%= link_to 'Edit', edit_arduino_path(@arduino) %> |
-<%= link_to 'Back', arduinos_path %>
+<%= link_to 'List devices', arduinos_path %>

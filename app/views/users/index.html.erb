@@ -1,42 +1,44 @@
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
+<div id="getting-started">
+  <h1>Getting started</h1>
+  <h2>Here&rsquo;s how to get rolling:</h2>
           
-          <ol>          
-            <li>
+  <ol>
+<% unless current_user %>
+    <li>
               <h2>Register an account</h2>
-              <p><a href="/signup">Click here</a> and wait for a confirmation email.
-	      <strong>This is currently disabled, so you won't be able to confirm the account
-	      and join the service. We're testing it, so bear with us.</strong></p>
-            </li>
-            
-            <li>
+              <p><a href="/signup">Click here</a> to register
+              and wait for a confirmation email. Click
+              into the activation link and come back here.</p>
+    </li>
+<% end %>
+
+    <li>
               <h2>Register a device</h2>
 <p>
 <% unless current_user %>
               Please <a href="/login">sign in</a> first.
 <% else %>
-             <a href="/arduinos/new">Click here</a>
+             <a href="/arduinos/new">Click here</a> to get a Device Key and link
+             a XMPP account of yours to that key.
 <% end %>
 </p>
-            </li>
+    </li>
 
-            <li>
+    <li>
               <h2>Write the firmware for the device</h2>
               <p>Use these values in your code:</p>
 	      <ul class="configuration">
 		<li>IP address: <tt>194.185.69.19</tt></li>
 		<li>Port: <tt>80</tt></li>
-		<li>Method: <tt>POST</tt></li>
+		<li>Method: <tt>POST</tt> (preferred) or <tt>GET</tt> (your messages might be logged by all proxies on the way to us)</li>
 		<li>URL: <tt>/xmpp</tt></li>
 		<li>Arguments: <tt>id=message</tt></li>
 		</ul>
-            </li>
+    </li>
 
-            <li>
+    <li>
               <h2>Run the firwmare and receive IMs</h2>
-              <p>Check the account you associated with the device.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
+              <p>Turn on your IM client and check the account you associated with the device.</p>
+    </li>
+  </ol>
+</div>

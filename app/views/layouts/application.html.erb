@@ -6,23 +6,6 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title>ARPPR: Arduino to XMPP Gateway</title>
     <%= stylesheet_link_tag "scaffold" %>
-    <script type="text/javascript" src="javascripts/prototype.js"></script>
-    <script type="text/javascript" src="javascripts/effects.js"></script>
-    <script type="text/javascript">
-      function about() {
-        if (Element.empty('about-content')) {
-          new Ajax.Updater('about-content', 'rails/info/properties', {
-            method:     'get',
-            onFailure:  function() {Element.classNames('about-content').add('failure')},
-            onComplete: function() {new Effect.BlindDown('about-content', {duration: 0.25})}
-          });
-        } else {
-          new Effect[Element.visible('about-content') ? 
-            'BlindUp' : 'BlindDown']('about-content', {duration: 0.25});
-        }
-      }
-      
-    </script>
   </head>
   <body>
     <div id="page">
@@ -31,22 +14,29 @@
         
           <li>
             <ul class="links">
-              <li><a href="/">Home</a></li>
 <% unless current_user %>
-              <li><a href="/signup">Register an account</a> <strong>(won't work)</strong></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/signup">Register an account</a></li>
               <li><a href="/login">Login</a></li>
 <% else %>
-              <li><a href="/logout">Logout</a></li>
+              <li><strong><%= current_user.login %></strong></li>
+              <li><a href="/">Home</a> <a href="/logout">Logout</a></li>
+              <li><a href="/arduinos">List devices</a></li>
+              <li><a href="/arduinos/new">Register a device</a></li>
 <% end %>
             </ul>
           </li>
 
           <li>
-            <h3>The Milano Hack-Ups</h3>
+            <h3>The Project</h3>
+            <p>This project has been created by a team of developers in two afternoons 
+            during the Hack-Ups in Milano, Italy</p>
             <ul class="links">
-              <li><a href="http://www.hack-up.org/">Home</a></li>
+              <li><a href="http://www.hack-up.org/wiki/index.php?title=Milan_16_Nov_2008">
+	      Hack Up #1</a>, November 16 2008: the core algorithm</li>
               <li><a href="http://www.hack-up.org/wiki/index.php?title=Milan_29_Mar_2009">
-	      March 29 2009</a></li>
+	      Hack Up #4</a>, March 29 2009: the web service</li>
+              <li><a href="http://www.hack-up.org/">The Hack-Up home</a></li>
             </ul>
           </li>
           
@@ -55,9 +45,18 @@
             <ul class="links">
               <li><a href="http://github.com/pmontrasio/arpp/tree/master">
 		  The code of this application</a></li>
-              <li><a href="http://home.gna.org/xmpp4r/">The XMPP4R Gem</a></li>
+              <li><a href="http://rubyonrails.org/">Ruby on Rails</a></li>
+              <li><a href="http://home.gna.org/xmpp4r/">XMPP4R</a></li>
             </ul>
           </li>
+
+          <li>
+            <h3>Hardware</h3>
+            <ul class="links">
+            <li>Learn about <a href="http://www.arduino.cc/">Arduino</a></li> 
+            </ul>
+          </li>
+
         </ul>
       </div>
 
@@ -67,18 +66,23 @@
           <h2>Arduino to XMPP gateway</h2>
         </div>
 
-<% if current_user %>
-        <div id="about">
-	  <p>Welcome <strong><%= current_user.login %></strong></p>
-        </div>
-<% end %>
-        
+<% if flash[:notice] %>        
 <p style="color: green"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:error] %>        
+<p style="color: red"><%= flash[:error] %></p>
+<% end %>
 
 <%= yield %>
 
+
+      </div>
       
-      <div id="footer">&nbsp;</div>
+      <div id="footer">
+            <p>This server is managed by
+            <a href="http://www.connettiva.eu">Connettiva</a><br />
+ Rapid Web Application Developement - P.IVA 05411020968</p>
+      </div>
     </div>
   </body>
 </html>

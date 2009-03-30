@@ -1,4 +1,4 @@
-<h1>Listing arduinos</h1>
+<h1>Your devices</h1>
 
 <table>
   <tr>
@@ -14,13 +14,16 @@
     <td><%=h arduino.xmpp_account %></td>
  
 
-    <td><%= link_to 'Show', arduino %></td>
+    <td><%= link_to 'View', arduino %></td>
     <td><%= link_to 'Edit', edit_arduino_path(arduino) %></td>
-    <td><%= link_to 'Destroy', arduino, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Remove', arduino, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
+<p>The device key is used by the server to find the XMPP account to forward to the messages
+received by the device. You must include it into your firmware as explained in the home page.</p>
 
-<%= link_to 'New arduino', new_arduino_path %>
+<p>
+<%= link_to 'Register a device', new_arduino_path %>
+</p>

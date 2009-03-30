@@ -1,8 +1,10 @@
 class ArduinosController < ApplicationController
+
+  before_filter :get_device
+
   # GET /arduinos
   # GET /arduinos.xml
   def index
-
     @arduinos = Arduino.find_all_by_user_id(current_user.id)
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +15,7 @@ class ArduinosController < ApplicationController
   # GET /arduinos/1
   # GET /arduinos/1.xml
   def show
-    @arduino = Arduino.find(params[:id])
-
+    not_your_device and return if @arduino.nil?
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @arduino }
@@ -34,17 +35,19 @@ class ArduinosController < ApplicationController
 
   # GET /arduinos/1/edit
   def edit
-    @arduino = Arduino.find(params[:id])
+    not_your_device and return if @arduino.nil?
   end
 
   # POST /arduinos
   # POST /arduinos.xml
   def create
     @arduino = Arduino.new(params[:arduino])
+    @arduino.user_id = current_user.id
+    @arduino.device_key = Arduino.generate_device_key
 
     respond_to do |format|
       if @arduino.save
-        flash[:notice] = 'Arduino was successfully created.'
+        flash[:notice] = "The device has been successfully created"
         format.html { redirect_to(@arduino) }
         format.xml  { render :xml => @arduino, :status => :created, :location => @arduino }
       else
@@ -57,7 +60,7 @@ class ArduinosController < ApplicationController
   # PUT /arduinos/1
   # PUT /arduinos/1.xml
   def update
-    @arduino = Arduino.find(params[:id])
+    not_your_device and return if @arduino.nil?
 
     respond_to do |format|
       if @arduino.update_attributes(params[:arduino])
@@ -74,12 +77,28 @@ class ArduinosController < ApplicationController
   # DELETE /arduinos/1
   # DELETE /arduinos/1.xml
   def destroy
-    @arduino = Arduino.find(params[:id])
+    not_your_device and return if @arduino.nil?
+
     @arduino.destroy
 
     respond_to do |format|
       format.html { redirect_to(arduinos_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def get_device
+    if params[:id] && current_user
+      @arduino = Arduino.find_by_id_and_user_id(params[:id], current_user.id)
+    else
+      @arduino = nil
+    end
+  end
+
+  def not_your_device
+    flash[:error] = "Not your device"
+    redirect_to :action => "index"
   end
 end
